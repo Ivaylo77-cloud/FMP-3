@@ -1,0 +1,86 @@
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public Rigidbody rb;
+
+    public float moveSpeed = 6f;
+    public float jumpForce = 7f;
+
+    public float runSpeed = 10f;
+
+    public int maxJumps = 2;
+
+    public float gravity = -20f;
+    public float glideGravity = -5f;
+
+    private int jumpsLeft;
+
+    void Start()
+    {
+        jumpsLeft = maxJumps;
+    }
+
+    void Update()
+    {
+        Move();
+        Run();
+        Jump();
+        Glide();
+    }
+
+    void Move()
+    {
+        float x = Input.GetAxis("Horizontal"); // A/D
+        float z = Input.GetAxis("Vertical");   // W/S
+
+        Vector3 move = new Vector3(x, 0, z);
+
+        rb.linearVelocity = new Vector3(
+            move.x * moveSpeed,
+            rb.linearVelocity.y,
+            move.z * moveSpeed
+        );
+    }
+
+    void Run()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = 6f;
+        }
+    }    
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+            jumpsLeft--;
+        }
+    }
+
+    void Glide()
+    {
+        if (Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * glideGravity * Time.deltaTime;
+        }
+        else
+        {
+            rb.linearVelocity += Vector3.up * gravity * Time.deltaTime;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            jumpsLeft = maxJumps;
+        }
+    }
+}
