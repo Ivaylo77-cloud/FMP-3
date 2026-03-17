@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moveSpeed = 6f;
+           
         }
     }    
 
