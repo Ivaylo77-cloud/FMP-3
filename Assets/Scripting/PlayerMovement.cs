@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
     private int jumpsLeft;
 
+    //Stamina
+    public float maxStamina = 5f;
+    public float stamina;
+    public float rechargeRate = 1f;
+    public float sprintDrain = 1f;
+    public float glideDrain = 0.8f;
+    public float jumpCost = 1.5f;
+
+    
+    public Slider staminaBar;
+
+
     void Start()
     {
         jumpsLeft = maxJumps;
@@ -27,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         Run();
         Jump();
         Glide();
+        RechargeStamina();
+
+        staminaBar.value = stamina / maxStamina;
     }
 
     void Move()
@@ -45,9 +61,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
         {
             moveSpeed = runSpeed;
+            stamina -= sprintDrain * Time.deltaTime;
         }
         else
         {
@@ -57,24 +74,41 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0 && stamina >= jumpCost) 
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
-            jumpsLeft--;
+            jumpsLeft --;
+            stamina -= jumpCost;
         }
     }
 
     void Glide()
     {
-        if (Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0)
+        if (Input.GetKey(KeyCode.Space) && rb.linearVelocity.y < 0 && stamina > 0)
         {
             rb.linearVelocity += Vector3.up * glideGravity * Time.deltaTime;
+            stamina -= glideDrain * Time.deltaTime;
         }
         else
         {
             rb.linearVelocity += Vector3.up * gravity * Time.deltaTime;
         }
+
+
+
+
     }
+
+    void RechargeStamina()
+    {
+        if (stamina < maxStamina)
+        {
+            stamina += rechargeRate * Time.deltaTime;
+        }
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
