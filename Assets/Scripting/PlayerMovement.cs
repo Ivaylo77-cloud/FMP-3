@@ -50,13 +50,17 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal"); // A/D
         float z = Input.GetAxis("Vertical");   // W/S
 
-        Vector3 move = new Vector3(x, 0, z);
+        Vector3 move = transform.right * x + transform.forward * z;
 
         rb.linearVelocity = new Vector3(
-            move.x * moveSpeed,
-            rb.linearVelocity.y,
-            move.z * moveSpeed
-        );
+        move.x * moveSpeed,
+        rb.linearVelocity.y,
+        move.z * moveSpeed
+);
+
+
+        transform.position += move * moveSpeed * Time.deltaTime;
+        
     }
 
     void Run()
