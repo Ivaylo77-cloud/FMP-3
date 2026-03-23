@@ -832,8 +832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 391581040}
-  sensitivity: 1000
-  smoothTime: 0.01
+  sensitivity: 400
+  smoothTime: 0.03
   minY: 0
   maxY: 0
 --- !u!1 &391581036

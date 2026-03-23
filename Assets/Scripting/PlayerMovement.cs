@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 );
 
 
-        transform.position += move * moveSpeed * Time.deltaTime;
+ 
         
     }
 
