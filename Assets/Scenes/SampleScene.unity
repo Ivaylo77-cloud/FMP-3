@@ -278,8 +278,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20.06
+  m_fontSizeBase: 20.06
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -715,7 +715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &277972711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1035,7 +1035,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.22041148, y: -0, z: -0, w: 0.975407}
-  m_LocalPosition: {x: -0.050000012, y: 3.481, z: -5.242}
+  m_LocalPosition: {x: -0.050000012, y: 4.87, z: -8.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1491,6 +1491,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6896661088745265644, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
+--- !u!1 &541187458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8368870645388669044, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
+  m_PrefabInstance: {fileID: 840405619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &541187462
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541187458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7265753759005285924, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
 --- !u!1 &548318745 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4674920219975612092, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
@@ -1796,8 +1823,12 @@ MonoBehaviour:
   dialogueText: {fileID: 45780746}
   dialogueLines:
   - Hello!
-  - How are You.
-  - Goodbye!
+  - Find all 6 seeds
+  - You have double jump
+  - You have gliding when holding Space
+  - You have sprint when holding Left Shift
+  - Track your stamina bar
+  - Goodbye! And don't talk to the red guy
   typingSpeed: 0.04
 --- !u!136 &734979291
 CapsuleCollider:
@@ -1884,7 +1915,7 @@ Transform:
   m_GameObject: {fileID: 734979289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0243, y: 1.13, z: 6.38}
+  m_LocalPosition: {x: 0.41, y: 1.13, z: -3.46}
   m_LocalScale: {x: 1.6541, y: 1.6541, z: 1.6541}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2373,6 +2404,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8531084230230199607, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1225007668}
+    - targetCorrespondingSourceObject: {fileID: -5878550535208919107, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1812226388}
+    - targetCorrespondingSourceObject: {fileID: -8368870645388669044, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 541187462}
     - targetCorrespondingSourceObject: {fileID: 4674920219975612092, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 548318749}
@@ -2424,7 +2461,7 @@ Transform:
   m_GameObject: {fileID: 855173033}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.14, y: 1.88, z: 3.966}
+  m_LocalPosition: {x: -20.96, y: 3.46, z: -1.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7514,7 +7551,7 @@ Transform:
   m_GameObject: {fileID: 1035950811}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4, y: 0.94926, z: 6.32}
+  m_LocalPosition: {x: -20.11, y: 6.84, z: -0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7829,7 +7866,7 @@ Transform:
   m_GameObject: {fileID: 1130692816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.86991, y: 0.94926, z: 0.95491004}
+  m_LocalPosition: {x: -8.87, y: 0.94926, z: 0.95491004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8034,7 +8071,7 @@ Transform:
   m_GameObject: {fileID: 1478495252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.18, y: 4.94, z: 8.47}
+  m_LocalPosition: {x: -10.67, y: 14.83, z: 3.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8163,8 +8200,8 @@ MonoBehaviour:
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
   dialogueLines:
-  - What's Up
-  - Go Away!
+  - Hello!
+  - You just lost your time
   - LOL
   typingSpeed: 0.04
 --- !u!136 &1504899678
@@ -8213,7 +8250,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ebfb3f12553b67546962d817607c2d9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8413,7 +8450,7 @@ Transform:
   m_GameObject: {fileID: 1775054645}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.58, y: 2.54, z: 0.04}
+  m_LocalPosition: {x: -12.62, y: 8.7, z: 2.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8610,7 +8647,7 @@ Transform:
   m_GameObject: {fileID: 1793070669}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.42, y: 0.94926, z: 5.33}
+  m_LocalPosition: {x: -30.1, y: 3.08, z: -0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8703,6 +8740,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793070669}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1812226384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5878550535208919107, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
+  m_PrefabInstance: {fileID: 840405619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1812226388
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812226384}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8058762967352855669, guid: 6cecf20fdee15c848aeba55c8d2c2db2, type: 3}
 --- !u!1 &1843790828
 GameObject:
   m_ObjectHideFlags: 0
