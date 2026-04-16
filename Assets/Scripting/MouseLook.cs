@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public Transform playerBody;   // Assign your player object
+    public Transform playerBody;
 
     [Header("Settings")]
     public float sensitivity = 100f;
     public float smoothTime = 0.05f;
 
-    private float currentMouseX;
-    private float currentVelocityX;
+    private float targetRotationX;
+    private float currentRotationX;
+    private float rotationVelocity;
 
     void Start()
     {
@@ -18,13 +19,19 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        // Get raw mouse X input only
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity;
 
-        // Smooth the input
-        currentMouseX = Mathf.SmoothDamp(currentMouseX, mouseX, ref currentVelocityX, smoothTime);
+        // Accumulate rotation (no deltaTime here)
+        targetRotationX += mouseX * Time.deltaTime;
 
-        // Rotate player left/right
-        playerBody.Rotate(Vector3.up * currentMouseX);
+        // Smooth toward the target rotation
+        currentRotationX = Mathf.SmoothDamp(
+            currentRotationX,
+            targetRotationX,
+            ref rotationVelocity,
+            smoothTime
+        );
+
+        playerBody.rotation = Quaternion.Euler(0f, currentRotationX, 0f);
     }
 }
