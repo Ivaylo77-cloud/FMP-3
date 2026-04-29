@@ -10,7 +10,7 @@ public class SafeDoor : MonoBehaviour
     {
         if (!isOpen)
         {
-            animator.SetTrigger("Open");
+            Destroy(gameObject);
             isOpen = true;
         }
     }

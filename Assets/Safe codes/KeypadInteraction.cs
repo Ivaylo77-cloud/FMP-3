@@ -18,6 +18,7 @@ public class KeypadInteraction : MonoBehaviour
 
     void OpenKeypad()
     {
+        promptUI.SetActive(false);
         keypadUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -38,6 +39,7 @@ public class KeypadInteraction : MonoBehaviour
         {
             playerInRange = false;
             promptUI.SetActive(false);
+            keypadUI.SetActive(false);
         }
     }
 }

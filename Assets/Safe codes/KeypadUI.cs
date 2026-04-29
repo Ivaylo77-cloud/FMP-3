@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class KeypadUI : MonoBehaviour
 {
-    public Text displayText;
+    public TMP_Text displayText;
     public string correctCode = "1234";
 
     private string currentInput = "";
@@ -20,17 +21,22 @@ public class KeypadUI : MonoBehaviour
         }
     }
 
+  
+    
     public void Confirm()
     {
         if (currentInput == correctCode)
         {
+            displayText.text = "CORRECT!";
+            Invoke(nameof(ClearDisplay), 3f);
             safeDoor.OpenDoor();
             CloseUI();
+            
         }
         else
         {
             currentInput = "";
-            displayText.text = "WRONG";
+            displayText.text = "WRONG!";
             Invoke(nameof(ClearDisplay), 1f);
         }
     }
@@ -49,4 +55,6 @@ public class KeypadUI : MonoBehaviour
         currentInput = "";
         displayText.text = "";
     }
+
+    
 }

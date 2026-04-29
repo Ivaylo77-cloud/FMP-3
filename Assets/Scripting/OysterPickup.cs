@@ -8,7 +8,7 @@ public class OysterPickup : MonoBehaviour
         {
             OysterCard player = other.GetComponent<OysterCard>();
 
-            if (player != null)
+            if (player != null ) 
             {
                 player.PickUpCard();
                 gameObject.SetActive(false);
