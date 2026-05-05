@@ -115,9 +115,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground"))
         {
             jumpsLeft = maxJumps;
         }
