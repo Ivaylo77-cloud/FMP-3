@@ -1508,8 +1508,8 @@ Transform:
   m_GameObject: {fileID: 925636601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.97024, y: 0.03605, z: -16.42305}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 16.703, y: -0.033, z: -17.393}
+  m_LocalScale: {x: 1.6806, y: 1.6806, z: 1.6806}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1807748316}
@@ -2058,8 +2058,8 @@ MonoBehaviour:
   maxStamina: 6
   stamina: 6
   rechargeRate: 1
-  sprintDrain: 1.5
-  glideDrain: 1.5
+  sprintDrain: 1.2
+  glideDrain: 1.2
   jumpCost: 1.1
   staminaBar: {fileID: 795367965}
 --- !u!54 &1313650473

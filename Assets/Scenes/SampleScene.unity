@@ -3588,8 +3588,8 @@ MonoBehaviour:
   maxStamina: 6
   stamina: 6
   rechargeRate: 1
-  sprintDrain: 1.5
-  glideDrain: 1.5
+  sprintDrain: 1.2
+  glideDrain: 1.2
   jumpCost: 1.1
   staminaBar: {fileID: 2047540566}
 --- !u!54 &391581042
