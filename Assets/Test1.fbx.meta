@@ -22,7 +22,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -80,7 +80,47 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Test1(Clone)
+      parentName: 
+      position: {x: -2.842171e-14, y: 0, z: -5.684342e-14}
+      rotation: {x: 0, y: 0.00000015099579, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EYE.L
+      parentName: Test1(Clone)
+      position: {x: -0.01790847, y: 0.45747274, z: -0.062465463}
+      rotation: {x: -0.00000015313309, y: -0.00000009974803, z: 0.7071068, w: 0.7071067}
+      scale: {x: 0.039006084, y: 0.039006084, z: 0.039006084}
+    - name: EYE.R
+      parentName: Test1(Clone)
+      position: {x: -0.01790847, y: 0.45747274, z: -0.062465463}
+      rotation: {x: -0.00000015313309, y: -0.00000009974803, z: 0.7071068, w: 0.7071067}
+      scale: {x: 0.039006084, y: 0.039006084, z: 0.039006084}
+    - name: OuterEyeShell.L
+      parentName: Test1(Clone)
+      position: {x: -0.017908474, y: 0.4574728, z: -0.06246547}
+      rotation: {x: -0.00000015313307, y: -0.00000009974802, z: 0.7071068, w: 0.7071067}
+      scale: {x: -0.03923609, y: -0.03923609, z: -0.03923609}
+    - name: OuterEyeShell.R
+      parentName: Test1(Clone)
+      position: {x: -0.017908474, y: 0.4574728, z: -0.06246547}
+      rotation: {x: -0.00000015313307, y: -0.00000009974802, z: 0.7071068, w: 0.7071067}
+      scale: {x: -0.03923609, y: -0.03923609, z: -0.03923609}
+    - name: Tongue
+      parentName: Test1(Clone)
+      position: {x: -0.09597801, y: 0.40050006, z: -0.00000003012908}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tongue.001
+      parentName: Test1(Clone)
+      position: {x: 1.7329196, y: -0.09169607, z: 3.983366}
+      rotation: {x: 0, y: 0.70710665, z: 0, w: 0.7071069}
+      scale: {x: 0.14967337, y: 0.14967337, z: 0.14967337}
+    - name: Wing.001
+      parentName: Test1(Clone)
+      position: {x: 0.10390028, y: -0.051328644, z: 0.000000032616015}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.27166352, y: 0.27166352, z: 0.27166352}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -97,7 +137,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

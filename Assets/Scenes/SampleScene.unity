@@ -3579,6 +3579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 391581042}
+  animator: {fileID: 3723675004991814735}
   moveSpeed: 6
   jumpForce: 10
   runSpeed: 10
@@ -24451,9 +24452,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931239451145674139}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 39675cfd565450f47b8c1ee318d28a0f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 09bd6c185cc95d443a2c2f358ba13276, type: 2}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0fda04b0fdccbd64795e93513e6ad5f2, type: 3}
+  m_Controller: {fileID: 9100000, guid: f2001229d1e997846b646be201e58e6c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

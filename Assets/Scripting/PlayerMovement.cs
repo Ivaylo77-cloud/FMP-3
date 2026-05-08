@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
+    public Animator animator;
 
     public float moveSpeed = 6f;
     public float jumpForce = 7f;
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         jumpsLeft = maxJumps;
+
+        animator.Play("Idle");
     }
 
     void Update()
@@ -41,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         Glide();
         RechargeStamina();
+
+        UpdateAnimations();
 
         staminaBar.value = stamina / maxStamina;
     }
@@ -112,6 +117,34 @@ public class PlayerMovement : MonoBehaviour
         }
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
 
+    }
+
+    void UpdateAnimations()
+    {
+        //Horizontal movement speed
+        Vector3 horizontalVelocity = new Vector3(
+        rb.linearVelocity.x,
+        0,
+        rb.linearVelocity.z
+    );
+
+        float speed = horizontalVelocity.magnitude;
+
+        // Check grounded
+        bool isGrounded = jumpsLeft == maxJumps;
+
+        // Check gliding
+        bool isGliding = Input.GetKey(KeyCode.Space)
+                         && rb.linearVelocity.y < 0
+                         && stamina > 0;
+
+        // Check running
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && speed > 0.1f;
+
+        animator.SetFloat("Speed", speed);
+        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool("IsGliding", isGliding);
+        //animator.SetBool("IsRunning", isRunning);
     }
 
 
