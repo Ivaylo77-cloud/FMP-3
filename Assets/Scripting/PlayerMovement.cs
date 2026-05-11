@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpAudio;
     public AudioSource glideAudio;
 
+    private Coroutine glideFadeCoroutine;
+    public float glideFadeDuration = 0.5f;
 
     public Slider staminaBar;
 
@@ -51,11 +54,13 @@ public class PlayerMovement : MonoBehaviour
         Glide();
         RechargeStamina();
 
+        staminaBar.value = stamina / maxStamina;
+
         UpdateAnimations();
 
         HandleAudio();
 
-        staminaBar.value = stamina / maxStamina;
+        
     }
 
     void Move()
@@ -205,13 +210,24 @@ public class PlayerMovement : MonoBehaviour
         // GLIDE
         if (isGliding)
         {
+            // Stop fade if gliding starts again
+            if (glideFadeCoroutine != null)
+            {
+                StopCoroutine(glideFadeCoroutine);
+                glideFadeCoroutine = null;
+            }
+
+            glideAudio.volume = 1f;
+
             if (!glideAudio.isPlaying)
                 glideAudio.Play();
         }
         else
         {
-            if (glideAudio.isPlaying)
-                glideAudio.Stop();
+            if (glideAudio.isPlaying && glideFadeCoroutine == null)
+            {
+                glideFadeCoroutine = StartCoroutine(FadeOutGlide());
+            }
         }
     }
 
@@ -222,5 +238,23 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpsLeft = maxJumps;
         }
+    }
+
+    IEnumerator FadeOutGlide()
+    {
+        float startVolume = glideAudio.volume;
+
+        while (glideAudio.volume > 0)
+        {
+            glideAudio.volume -= startVolume * Time.deltaTime / glideFadeDuration;
+            yield return null;
+        }
+
+        glideAudio.Stop();
+
+        // Reset volume for next glide
+        glideAudio.volume = 1f;
+
+        glideFadeCoroutine = null;
     }
 }
