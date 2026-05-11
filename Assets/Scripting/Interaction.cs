@@ -15,6 +15,10 @@ public class Interaction : MonoBehaviour
     public string[] dialogueLines;
     public float typingSpeed = 0.03f;
 
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip talkingSound;
+
     private bool isPlayerNearby = false;
     private bool isTalking = false;
 
@@ -40,10 +44,16 @@ public class Interaction : MonoBehaviour
             {
                 if (isTyping)
                 {
-                    // Skip typing
+                    // Skip typing instantly
                     StopCoroutine(typingCoroutine);
+
                     dialogueText.text = dialogueLines[currentLine];
+
                     isTyping = false;
+
+                    // Stop talking sound
+                    audioSource.Stop();
+                    audioSource.loop = false;
                 }
                 else
                 {
@@ -57,6 +67,7 @@ public class Interaction : MonoBehaviour
     {
         isTalking = true;
         currentLine = 0;
+
         dialoguePanel.SetActive(true);
         interactText.SetActive(false);
 
@@ -87,19 +98,39 @@ public class Interaction : MonoBehaviour
         isTyping = true;
         dialogueText.text = "";
 
+        // Random pitch for more natural voice
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+
+        // Start smooth looping talking sound
+        if (talkingSound != null)
+        {
+            audioSource.clip = talkingSound;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
         foreach (char letter in line)
         {
             dialogueText.text += letter;
+
             yield return new WaitForSeconds(typingSpeed);
         }
 
         isTyping = false;
+
+        // Stop sound when typing ends
+        audioSource.Stop();
+        audioSource.loop = false;
     }
 
     void EndDialogue()
     {
         isTalking = false;
+
         dialoguePanel.SetActive(false);
+
+        audioSource.Stop();
+        audioSource.loop = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -116,7 +147,9 @@ public class Interaction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
+
             interactText.SetActive(false);
+
             EndDialogue();
         }
     }
