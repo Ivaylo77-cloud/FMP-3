@@ -26,7 +26,13 @@ public class PlayerMovement : MonoBehaviour
     public float glideDrain = 0.8f;
     public float jumpCost = 1.5f;
 
-    
+    [Header("Audio")]
+    public AudioSource walkAudio;
+    public AudioSource sprintAudio;
+    public AudioSource jumpAudio;
+    public AudioSource glideAudio;
+
+
     public Slider staminaBar;
 
 
@@ -46,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         RechargeStamina();
 
         UpdateAnimations();
+
+        HandleAudio();
 
         staminaBar.value = stamina / maxStamina;
     }
@@ -87,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0 && stamina >= jumpCost) 
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+
+            jumpAudio.PlayOneShot(jumpAudio.clip);
+
             jumpsLeft --;
             stamina -= jumpCost;
         }
@@ -145,6 +156,63 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("IsGliding", isGliding);
         //animator.SetBool("IsRunning", isRunning);
+    }
+
+    void HandleAudio()
+    {
+        // Horizontal speed only
+        Vector3 horizontalVelocity = new Vector3(
+            rb.linearVelocity.x,
+            0,
+            rb.linearVelocity.z
+        );
+
+        float speed = horizontalVelocity.magnitude;
+
+        bool isMoving = speed > 0.1f;
+        bool isGrounded = jumpsLeft == maxJumps;
+
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && stamina > 0;
+
+        bool isGliding = Input.GetKey(KeyCode.Space)
+                         && rb.linearVelocity.y < 0
+                         && stamina > 0;
+
+        // WALK
+        if (isGrounded && isMoving && !isRunning)
+        {
+            if (!walkAudio.isPlaying)
+                walkAudio.Play();
+        }
+        else
+        {
+            if (walkAudio.isPlaying)
+                walkAudio.Stop();
+        }
+
+        // RUN
+        if (isGrounded && isMoving && isRunning)
+        {
+            if (!sprintAudio.isPlaying)
+                sprintAudio.Play();
+        }
+        else
+        {
+            if (sprintAudio.isPlaying)
+                sprintAudio.Stop();
+        }
+
+        // GLIDE
+        if (isGliding)
+        {
+            if (!glideAudio.isPlaying)
+                glideAudio.Play();
+        }
+        else
+        {
+            if (glideAudio.isPlaying)
+                glideAudio.Stop();
+        }
     }
 
 
