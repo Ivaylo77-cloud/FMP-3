@@ -5295,6 +5295,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -7517,6 +7525,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -8168,6 +8184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -19737,6 +19761,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -20285,6 +20317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -20635,6 +20675,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -23673,6 +23721,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 1
+  bossHPBar: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  bossPatrol: {fileID: 0}
+  normalCamera: {fileID: 0}
+  fightCamera: {fileID: 0}
+  playerMovement: {fileID: 0}
+  simpleFight: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}

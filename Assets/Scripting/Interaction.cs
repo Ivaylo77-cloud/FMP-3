@@ -5,6 +5,25 @@ using UnityEngine.UI;
 
 public class Interaction : MonoBehaviour
 {
+    [Header("Boss Fight")]
+    public bool isBoss = true;
+
+    public SimpleFight simpleFight;
+
+    public Slider playerSlider;
+    public Slider bossSlider;
+
+    public GameObject bossHPBar;
+    public GameObject playerHPBar;
+
+    public MonoBehaviour bossPatrol;
+
+    public GameObject normalCamera;
+    public GameObject fightCamera;
+
+    public MonoBehaviour playerMovement;
+    
+
     [Header("UI")]
     public GameObject interactText;
     public GameObject dialoguePanel;
@@ -131,6 +150,21 @@ public class Interaction : MonoBehaviour
 
         audioSource.Stop();
         audioSource.loop = false;
+
+        if (isBoss)
+        {
+            bossPatrol.enabled = false;
+
+            playerMovement.enabled = false;
+
+            normalCamera.SetActive(false);
+            fightCamera.SetActive(true);
+
+            bossHPBar.SetActive(true);
+            playerHPBar.SetActive(true);
+
+            simpleFight.StartFight();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -138,7 +172,14 @@ public class Interaction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
+
             interactText.SetActive(true);
+
+            // STOP BOSS PATROL
+            if (isBoss && bossPatrol != null)
+            {
+                bossPatrol.enabled = false;
+            }
         }
     }
 
