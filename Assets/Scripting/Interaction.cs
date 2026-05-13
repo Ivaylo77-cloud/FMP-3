@@ -153,6 +153,9 @@ public class Interaction : MonoBehaviour
 
         if (isBoss)
         {
+            if (simpleFight.fightStarted)
+                return;
+
             bossPatrol.enabled = false;
 
             playerMovement.enabled = false;
@@ -191,7 +194,7 @@ public class Interaction : MonoBehaviour
 
             interactText.SetActive(false);
 
-            EndDialogue();
+            
         }
     }
 }
