@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SimpleFight : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class SimpleFight : MonoBehaviour
     public Slider attack1CooldownSlider;
     public Slider attack2CooldownSlider;
 
-    public float attack1Cooldown = 1.5f;
-    public float attack2Cooldown = 4f;
+    public float attack1Cooldown = 2f;
+    public float attack2Cooldown = 5f;
 
     private bool canAttack1 = true;
     private bool canAttack2 = true;
@@ -41,7 +42,26 @@ public class SimpleFight : MonoBehaviour
 
     private CameraShake cameraShake;
 
-    
+    [Header("Sound Effects")]
+
+    public AudioSource sfxSource;
+
+    public AudioClip playerAttack1Sound;
+    public AudioClip playerAttack2Sound;
+
+    public AudioClip bossAttack1Sound;
+    public AudioClip bossAttack2Sound;
+
+    public AudioClip doorOpenSound;
+
+    public AudioClip playerDeathSound;
+    public AudioClip bossDeathSound;
+
+    [Header("Death Screen")]
+
+    public GameObject deathScreen;
+
+
 
     void Start()
     {
@@ -83,9 +103,13 @@ public class SimpleFight : MonoBehaviour
 
     void Attack1()
     {
+        playerAnimator.SetTrigger("Attack1");
+
+        sfxSource.PlayOneShot(playerAttack1Sound);
+
         Debug.Log("ATTACK 1 TRIGGERED");
 
-        bossHealth -= 10;
+        bossHealth -= 8;
 
         bossSlider.value = bossHealth;
 
@@ -100,9 +124,13 @@ public class SimpleFight : MonoBehaviour
 
     void Attack2()
     {
+        playerAnimator.SetTrigger("Attack2");
+
+        sfxSource.PlayOneShot(playerAttack2Sound);
+
         Debug.Log("ATTACK 2 TRIGGERED");
 
-        bossHealth -= 20;
+        bossHealth -= 15;
 
         bossSlider.value = bossHealth;
 
@@ -206,19 +234,35 @@ public class SimpleFight : MonoBehaviour
         {
             bossAnimator.SetTrigger("Attack1");
 
+            Invoke(nameof(PlayBossAttack1Sound), 0.7f);
+
             Invoke(nameof(BossAttack1Damage), 1.2f);
         }
         else
         {
             bossAnimator.SetTrigger("Attack2");
 
+            Invoke(nameof(PlayBossAttack2Sound), 1.8f);
+
             Invoke(nameof(BossAttack2Damage), 2f);
         }
     }
 
+    void PlayBossAttack1Sound()
+    {
+        sfxSource.PlayOneShot(bossAttack1Sound);
+    }
+
+    void PlayBossAttack2Sound()
+    {
+        sfxSource.PlayOneShot(bossAttack2Sound);
+    }
+
     void BossAttack1Damage()
     {
-        playerHealth -= 10;
+        playerAnimator.SetTrigger("Hurt");
+
+        playerHealth -= 15;
 
         playerSlider.value = playerHealth;
 
@@ -231,7 +275,9 @@ public class SimpleFight : MonoBehaviour
 
     void BossAttack2Damage()
     {
-        playerHealth -= 15;
+        playerAnimator.SetTrigger("Hurt");
+
+        playerHealth -= 20;
 
         playerSlider.value = playerHealth;
 
@@ -251,6 +297,8 @@ public class SimpleFight : MonoBehaviour
             CancelInvoke();
 
             Debug.Log("Boss Defeated");
+
+            Invoke(nameof(PlayBossDeathSound), 1f);
 
             // PLAY DEATH ANIMATION
             bossAnimator.SetTrigger("Die");
@@ -296,6 +344,8 @@ public class SimpleFight : MonoBehaviour
         // OPEN METRO DOORS
         metroDoorAnimator.SetTrigger("OpenDoors");
 
+        sfxSource.PlayOneShot(doorOpenSound);
+
         // WAIT FOR CUTSCENE
         yield return new WaitForSeconds(4f);
 
@@ -337,10 +387,47 @@ public class SimpleFight : MonoBehaviour
 
             CancelInvoke(nameof(BossAttack));
 
-            playerAnimator.SetTrigger("Die");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            Invoke(nameof(PlayPlayerDeathSound), 1f);
+
+            StartCoroutine(PlayerDeathSequence());
+
+            // fake falling over
+            player.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
 
             Debug.Log("Player Died");
         }
+    }
+
+    void PlayPlayerDeathSound()
+    {
+        sfxSource.PlayOneShot(playerDeathSound, 2f);
+    }
+
+    void PlayBossDeathSound()
+    {
+        sfxSource.PlayOneShot(bossDeathSound, 2f);
+    }
+
+    IEnumerator PlayerDeathSequence()
+    {
+        // small delay
+        yield return new WaitForSeconds(2f);
+
+        // show death screen
+        deathScreen.SetActive(true);
+    }
+
+    public void RestartFight()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     void Awake()

@@ -41,11 +41,18 @@ public class BossPatrol : MonoBehaviour
         );
 
         // Rotate toward target
+        // Rotate toward target smoothly
         Vector3 direction = (target.position - transform.position).normalized;
 
         if (direction != Vector3.zero)
         {
-            transform.forward = direction;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                5f * Time.deltaTime
+            );
         }
 
         // Detect REAL movement
