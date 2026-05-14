@@ -102,10 +102,6 @@ public class SimpleFight : MonoBehaviour
 
     void BossAttack()
     {
-        Debug.Log("BossAttack FROM: " + gameObject.name + " ID: " + GetInstanceID());
-
-        Debug.Log("BEFORE DAMAGE: " + playerHealth);
-
         Debug.Log("BossAttack RUNNING");
 
         int randomAttack = Random.Range(0, 2);
@@ -114,21 +110,34 @@ public class SimpleFight : MonoBehaviour
         {
             bossAnimator.SetTrigger("Attack1");
 
-            playerHealth -= 10;
+            Invoke(nameof(BossAttack1Damage), 1.2f);
         }
         else
         {
             bossAnimator.SetTrigger("Attack2");
 
-            playerHealth -= 15;
+            Invoke(nameof(BossAttack2Damage), 2f);
         }
+    }
+
+    void BossAttack1Damage()
+    {
+        playerHealth -= 10;
 
         playerSlider.value = playerHealth;
 
-        Debug.Log("AFTER DAMAGE: " + playerHealth);
+        Debug.Log("Attack1 HIT");
 
+        CheckPlayerDeath();
+    }
 
-        Debug.Log("Player HP: " + playerHealth);
+    void BossAttack2Damage()
+    {
+        playerHealth -= 15;
+
+        playerSlider.value = playerHealth;
+
+        Debug.Log("Attack2 HIT");
 
         CheckPlayerDeath();
     }
