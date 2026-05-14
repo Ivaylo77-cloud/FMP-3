@@ -11,16 +11,28 @@ public class BossPatrol : MonoBehaviour
 
     private Transform target;
 
+    public bool isFighting = false;
+
+    private Vector3 lastPosition;
+
     void Start()
     {
         target = pointB;
 
-        // Start walking animation
-        bossAnimator.SetBool("IsWalking", true);
+        
     }
+
+    
 
     void Update()
     {
+        // Stop everything during fight
+        if (isFighting)
+        {
+            bossAnimator.SetBool("IsWalking", false);
+            return;
+        }
+
         // Move boss
         transform.position = Vector3.MoveTowards(
             transform.position,
@@ -35,6 +47,20 @@ public class BossPatrol : MonoBehaviour
         {
             transform.forward = direction;
         }
+
+        // Detect REAL movement
+        float movedDistance = Vector3.Distance(transform.position, lastPosition);
+
+        if (movedDistance > 0.001f)
+        {
+            bossAnimator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            bossAnimator.SetBool("IsWalking", false);
+        }
+
+        lastPosition = transform.position;
 
         // Switch patrol points
         if (Vector3.Distance(transform.position, target.position) < 0.2f)

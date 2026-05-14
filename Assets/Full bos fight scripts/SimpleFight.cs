@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +10,24 @@ public class SimpleFight : MonoBehaviour
     public Slider playerSlider;
     public Slider bossSlider;
 
+    [Header("Attack Cooldowns")]
+
+    public Slider attack1CooldownSlider;
+    public Slider attack2CooldownSlider;
+
+    public float attack1Cooldown = 1.5f;
+    public float attack2Cooldown = 4f;
+
+    private bool canAttack1 = true;
+    private bool canAttack2 = true;
+
     public GameObject normalCamera;
     public GameObject fightCamera;
+    public GameObject doorCutsceneCamera;
 
     public Animator playerAnimator;
     public Animator bossAnimator;
+    public Animator metroDoorAnimator;
 
     public GameObject bossHPBar;
     public GameObject playerHPBar;
@@ -25,6 +39,10 @@ public class SimpleFight : MonoBehaviour
 
     public bool fightStarted = false;
 
+    private CameraShake cameraShake;
+
+    
+
     void Start()
     {
         playerSlider.maxValue = playerHealth;
@@ -32,6 +50,16 @@ public class SimpleFight : MonoBehaviour
 
         bossSlider.maxValue = bossHealth;
         bossSlider.value = bossHealth;
+
+        attack1CooldownSlider.value = 1;
+        attack2CooldownSlider.value = 1;
+
+        attack1CooldownSlider.gameObject.SetActive(false);
+        attack2CooldownSlider.gameObject.SetActive(false);
+
+        cameraShake = fightCamera.GetComponent<CameraShake>();
+
+        
     }
 
     void Update()
@@ -40,13 +68,13 @@ public class SimpleFight : MonoBehaviour
             return;
 
         // Q attack
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && canAttack1)
         {
             Attack1();
         }
 
         // E attack
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canAttack2)
         {
             Attack2();
         }
@@ -61,9 +89,13 @@ public class SimpleFight : MonoBehaviour
 
         bossSlider.value = bossHealth;
 
+        StartCoroutine(cameraShake.Shake(0.15f, 0.15f));
+
         Debug.Log("BOSS HP AFTER HIT: " + bossHealth);
 
         CheckBossDeath();
+
+        StartCoroutine(Attack1Cooldown());
     }
 
     void Attack2()
@@ -74,9 +106,57 @@ public class SimpleFight : MonoBehaviour
 
         bossSlider.value = bossHealth;
 
+        StartCoroutine(cameraShake.Shake(0.15f, 0.15f));
+
         Debug.Log("BOSS HP AFTER HIT: " + bossHealth);
 
         CheckBossDeath();
+
+        StartCoroutine(Attack2Cooldown());
+    }
+
+    IEnumerator Attack1Cooldown()
+    {
+        canAttack1 = false;
+
+        float timer = attack1Cooldown;
+
+        attack1CooldownSlider.gameObject.SetActive(true);
+
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+
+            attack1CooldownSlider.value = 1 - (timer / attack1Cooldown);
+
+            yield return null;
+        }
+
+        attack1CooldownSlider.value = 1;
+
+        canAttack1 = true;
+    }
+
+    IEnumerator Attack2Cooldown()
+    {
+        canAttack2 = false;
+
+        float timer = attack2Cooldown;
+
+        attack2CooldownSlider.gameObject.SetActive(true);
+
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+
+            attack2CooldownSlider.value = 1 - (timer / attack2Cooldown);
+
+            yield return null;
+        }
+
+        attack2CooldownSlider.value = 1;
+
+        canAttack2 = true;
     }
 
     public void StartFight()
@@ -87,6 +167,21 @@ public class SimpleFight : MonoBehaviour
 
         fightStarted = true;
 
+        attack1CooldownSlider.gameObject.SetActive(true);
+        attack2CooldownSlider.gameObject.SetActive(true);
+
+        // STOP PATROL SCRIPT
+        BossPatrol patrol = boss.GetComponent<BossPatrol>();
+
+        if (patrol != null)
+        {
+            patrol.enabled = false;
+        }
+
+        // STOP WALKING ANIMATION
+        bossAnimator.SetBool("IsWalking", false);
+
+        // FACE EACH OTHER
         Vector3 bossPos = boss.transform.position;
         bossPos.y = player.transform.position.y;
 
@@ -97,6 +192,7 @@ public class SimpleFight : MonoBehaviour
 
         boss.transform.LookAt(playerPos);
 
+        // START BOSS ATTACKS
         InvokeRepeating(nameof(BossAttack), 2f, 3f);
     }
 
@@ -126,6 +222,8 @@ public class SimpleFight : MonoBehaviour
 
         playerSlider.value = playerHealth;
 
+        StartCoroutine(cameraShake.Shake(0.2f, 0.2f));
+
         Debug.Log("Attack1 HIT");
 
         CheckPlayerDeath();
@@ -136,6 +234,8 @@ public class SimpleFight : MonoBehaviour
         playerHealth -= 15;
 
         playerSlider.value = playerHealth;
+
+        StartCoroutine(cameraShake.Shake(0.2f, 0.2f));
 
         Debug.Log("Attack2 HIT");
 
@@ -152,26 +252,18 @@ public class SimpleFight : MonoBehaviour
 
             Debug.Log("Boss Defeated");
 
-            // Switch cameras back
-            fightCamera.SetActive(false);
-            normalCamera.SetActive(true);
+            // PLAY DEATH ANIMATION
+            bossAnimator.SetTrigger("Die");
 
-            // Re-enable movement
-            if (playerMovement != null)
+            // STOP PATROL
+            BossPatrol patrol = boss.GetComponent<BossPatrol>();
+
+            if (patrol != null)
             {
-                playerMovement.enabled = true;
+                patrol.enabled = false;
             }
 
-            // Stop player drifting
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-
-            // Disable interaction so fight cannot restart
+            // DISABLE INTERACTION
             Interaction interaction = boss.GetComponent<Interaction>();
 
             if (interaction != null)
@@ -179,9 +271,59 @@ public class SimpleFight : MonoBehaviour
                 interaction.enabled = false;
             }
 
-            bossHPBar.SetActive(false);
-            playerHPBar.SetActive(false);
+            // OPTIONAL: disable collider
+            Collider bossCollider = boss.GetComponent<Collider>();
+
+            if (bossCollider != null)
+            {
+                bossCollider.enabled = false;
+            }
+
+            // WAIT BEFORE HIDING UI/CAMERA
+            StartCoroutine(BossDeathSequence());
         }
+    }
+
+    IEnumerator BossDeathSequence()
+    {
+        // wait for death animation
+        yield return new WaitForSeconds(3f);
+
+        // SWITCH TO CUTSCENE CAMERA
+        fightCamera.SetActive(false);
+        doorCutsceneCamera.SetActive(true);
+
+        // OPEN METRO DOORS
+        metroDoorAnimator.SetTrigger("OpenDoors");
+
+        // WAIT FOR CUTSCENE
+        yield return new WaitForSeconds(4f);
+
+        // RETURN TO NORMAL CAMERA
+        doorCutsceneCamera.SetActive(false);
+        normalCamera.SetActive(true);
+
+        // enable player movement
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
+
+        // stop player drifting
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // hide combat UI
+        bossHPBar.SetActive(false);
+        playerHPBar.SetActive(false);
+
+        attack1CooldownSlider.gameObject.SetActive(false);
+        attack2CooldownSlider.gameObject.SetActive(false);
     }
 
     void CheckPlayerDeath()
@@ -189,6 +331,9 @@ public class SimpleFight : MonoBehaviour
         if (playerHealth <= 0)
         {
             fightStarted = false;
+
+            attack1CooldownSlider.gameObject.SetActive(false);
+            attack2CooldownSlider.gameObject.SetActive(false);
 
             CancelInvoke(nameof(BossAttack));
 

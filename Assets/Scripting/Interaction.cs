@@ -22,7 +22,7 @@ public class Interaction : MonoBehaviour
     public GameObject fightCamera;
 
     public MonoBehaviour playerMovement;
-    
+
 
     [Header("UI")]
     public GameObject interactText;
@@ -147,6 +147,7 @@ public class Interaction : MonoBehaviour
         isTalking = false;
 
         dialoguePanel.SetActive(false);
+        interactText.SetActive(false);
 
         audioSource.Stop();
         audioSource.loop = false;
@@ -183,6 +184,14 @@ public class Interaction : MonoBehaviour
             {
                 bossPatrol.enabled = false;
             }
+
+            // STOP WALKING ANIMATION
+            Animator bossAnimator = GetComponent<Animator>();
+
+            if (bossAnimator != null)
+            {
+                bossAnimator.SetBool("IsWalking", false);
+            }
         }
     }
 
@@ -194,7 +203,19 @@ public class Interaction : MonoBehaviour
 
             interactText.SetActive(false);
 
-            
+            // RESUME PATROL IF NOT TALKING/FIGHTING
+            if (!isTalking && isBoss && bossPatrol != null)
+            {
+                bossPatrol.enabled = true;
+            }
+
+            // RESUME WALK ANIMATION
+            Animator bossAnimator = GetComponent<Animator>();
+
+            if (bossAnimator != null)
+            {
+                bossAnimator.SetBool("IsWalking", true);
+            }
         }
     }
 }
