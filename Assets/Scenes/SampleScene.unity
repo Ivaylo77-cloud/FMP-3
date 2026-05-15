@@ -5147,7 +5147,6 @@ GameObject:
   - component: {fileID: 391581042}
   - component: {fileID: 391581041}
   - component: {fileID: 391581043}
-  - component: {fileID: 391581044}
   - component: {fileID: 391581045}
   - component: {fileID: 391581046}
   - component: {fileID: 391581047}
@@ -5329,20 +5328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOysterCard: 0
   uiPanel: {fileID: 1412602812}
---- !u!114 &391581044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391581036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aed8dd55072c4242ac82eb8dfac4c52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 1409421536}
-  fadeDuration: 2
 --- !u!82 &391581045
 AudioSource:
   m_ObjectHideFlags: 0
@@ -29057,6 +29042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803197909}
   - component: {fileID: 1803197908}
+  - component: {fileID: 1803197910}
   m_Layer: 0
   m_Name: Stairs transition
   m_TagString: SceneExit
@@ -29100,6 +29086,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -24.529, z: 0}
+--- !u!114 &1803197910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803197907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aed8dd55072c4242ac82eb8dfac4c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 1409421536}
+  fadeDuration: 2
+  sceneToLoad: Subway
 --- !u!1 &1803445311
 GameObject:
   m_ObjectHideFlags: 0

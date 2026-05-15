@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Subway.unity
     guid: 9d74845c3c960104097f23b7a97d1f9e
+  - enabled: 1
+    path: Assets/Scenes/Construction.unity
+    guid: 89c844a99f85dcc47b4e390357a7bee8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
