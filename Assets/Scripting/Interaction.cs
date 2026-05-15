@@ -26,6 +26,8 @@ public class Interaction : MonoBehaviour
     [Header("FINAL NPC (SEEDS)")]
     public bool isFinalNPC = false;
 
+    public bool isIntroNPC = false;
+
     public SeedBar seedBar;
     public TMP_Text resultText;
     public GameObject loseImage;
@@ -56,10 +58,27 @@ public class Interaction : MonoBehaviour
     private bool isTyping = false;
     private Coroutine typingCoroutine;
 
+    [Header("Timer")]
+
+    public float timer = 120f;
+
+    public TMP_Text timerText;
+
+    private bool timerRunning = false;
+
+    [Header("Bonus Time")]
+
+    public TMP_Text bonusTimeText;
+
     void Start()
     {
+
+        Time.timeScale = 1f;
+
         interactText.SetActive(false);
         dialoguePanel.SetActive(false);
+
+        
     }
 
     void Update()
@@ -84,6 +103,23 @@ public class Interaction : MonoBehaviour
                 {
                     NextLine();
                 }
+            }
+        }
+
+        if (timerRunning)
+        {
+            timer -= Time.deltaTime;
+
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+
+            timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+            if (timer <= 0)
+            {
+                timerRunning = false;
+
+                TimerLose();
             }
         }
     }
@@ -154,9 +190,13 @@ public class Interaction : MonoBehaviour
         audioSource.Stop();
         audioSource.loop = false;
 
-        // =========================
-        // 🟡 FINAL NPC LOGIC HERE
-        // =========================
+        
+
+        if (isIntroNPC)
+        {
+            timerRunning = true;
+        }
+
         if (isFinalNPC)
         {
             int collected = seedBar.currentSeeds;
@@ -180,6 +220,16 @@ public class Interaction : MonoBehaviour
                 retryButton.SetActive(true);
                 mainMenuButton.SetActive(true);
 
+                // STOP PLAYER CONTROL
+                if (playerMovement != null)
+                {
+                    playerMovement.enabled = false;
+                }
+
+                // SHOW MOUSE
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
                 loseText.text =
                     "You Lost due to not collecting all seeds\n\n" +
                     "You collected " + collected + " / " + needed;
@@ -187,12 +237,10 @@ public class Interaction : MonoBehaviour
                 Time.timeScale = 0f;
             }
 
-            return; // IMPORTANT: stops boss logic
+            return; 
         }
 
-        // =========================
-        // 🔴 BOSS LOGIC (UNCHANGED)
-        // =========================
+        
         if (isBoss)
         {
             if (simpleFight.fightStarted)
@@ -209,6 +257,45 @@ public class Interaction : MonoBehaviour
 
             simpleFight.StartFight();
         }
+    }
+
+    void TimerLose()
+    {
+        loseImage.SetActive(true);
+
+        loseText.gameObject.SetActive(true);
+
+        retryButton.SetActive(true);
+        mainMenuButton.SetActive(true);
+
+        loseText.text =
+            "You couldn't get to your way home in time.";
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Time.timeScale = 0f;
+    }
+
+    public void AddBonusTime()
+    {
+        timer += 8f;
+
+        StartCoroutine(ShowBonusTime());
+    }
+
+    IEnumerator ShowBonusTime()
+    {
+        bonusTimeText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        bonusTimeText.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)

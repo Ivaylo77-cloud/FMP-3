@@ -1,7 +1,8 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SimpleFight : MonoBehaviour
 {
@@ -60,6 +61,9 @@ public class SimpleFight : MonoBehaviour
     [Header("Death Screen")]
 
     public GameObject deathScreen;
+
+    public TMP_Text attack1Text;
+    public TMP_Text attack2Text;
 
 
 
@@ -222,6 +226,9 @@ public class SimpleFight : MonoBehaviour
 
         // START BOSS ATTACKS
         InvokeRepeating(nameof(BossAttack), 2f, 3f);
+
+        attack1Text.gameObject.SetActive(true);
+        attack2Text.gameObject.SetActive(true);
     }
 
     void BossAttack()
@@ -374,6 +381,9 @@ public class SimpleFight : MonoBehaviour
 
         attack1CooldownSlider.gameObject.SetActive(false);
         attack2CooldownSlider.gameObject.SetActive(false);
+
+        attack1Text.gameObject.SetActive(false);
+        attack2Text.gameObject.SetActive(false);
     }
 
     void CheckPlayerDeath()
@@ -398,6 +408,9 @@ public class SimpleFight : MonoBehaviour
             player.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
 
             Debug.Log("Player Died");
+
+            attack1Text.gameObject.SetActive(false);
+            attack2Text.gameObject.SetActive(false);
         }
     }
 
