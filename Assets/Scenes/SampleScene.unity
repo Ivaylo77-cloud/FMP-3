@@ -7192,6 +7192,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -10160,6 +10165,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -11256,6 +11266,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -25405,6 +25420,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -26064,7 +26084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b055095acab87a44a84ea943a2a521c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBoss: 1
+  isBoss: 0
   simpleFight: {fileID: 0}
   playerSlider: {fileID: 0}
   bossSlider: {fileID: 0}
@@ -26074,6 +26094,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -26542,6 +26567,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}
@@ -30484,6 +30514,11 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   fightCamera: {fileID: 0}
   playerMovement: {fileID: 0}
+  isFinalNPC: 0
+  seedBar: {fileID: 0}
+  resultText: {fileID: 0}
+  loseImage: {fileID: 0}
+  fakeDoor: {fileID: 0}
   interactText: {fileID: 786988448}
   dialoguePanel: {fileID: 759771930}
   dialogueText: {fileID: 45780746}

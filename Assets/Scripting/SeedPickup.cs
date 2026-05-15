@@ -8,7 +8,7 @@ public class SeedPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            seedBar.CollectSeed();
+            seedBar.AddSeed();
             Destroy(gameObject);
         }
     }

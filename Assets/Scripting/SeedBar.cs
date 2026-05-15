@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SeedBar : MonoBehaviour
 {
     public int currentSeeds = 0;
-    public int maxSeeds = 6;
+    public int maxSeeds = 15;
 
     public Slider slider;
 
@@ -14,17 +14,9 @@ public class SeedBar : MonoBehaviour
         slider.value = currentSeeds;
     }
 
-    void Update()
+    public void AddSeed()
     {
-        slider.value = Mathf.Lerp(slider.value, currentSeeds, Time.deltaTime * 5f);
-    }
-
-    public void CollectSeed()
-    {
-        if (currentSeeds < maxSeeds)
-        {
-            currentSeeds++;
-            slider.value = currentSeeds;
-        }
+        currentSeeds++;
+        slider.value = currentSeeds;
     }
 }
