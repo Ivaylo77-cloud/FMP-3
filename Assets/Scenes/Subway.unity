@@ -20790,8 +20790,10 @@ MonoBehaviour:
   dialoguePanel: {fileID: 572498470}
   dialogueText: {fileID: 929714844}
   dialogueLines:
-  - are you crazy coming here
-  - you are dead
+  - Are you crazy coming here!!
+  - Get out of my town!!
+  - So you want to stay HUH?!
+  - You are DEAD!
   typingSpeed: 0.03
   audioSource: {fileID: 7925809384079878848}
   talkingSound: {fileID: 8300000, guid: 985785870b92c0947b2a4b8ee966cbc9, type: 3}
